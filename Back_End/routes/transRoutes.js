@@ -4,7 +4,7 @@ import { generateTranscript } from '../controllers/transControler.js';
 
 const router = express.Router();
 
-router.post("/genTranscript",generateTranscript)
+router.post("/genTranscript",protect,generateTranscript)
 
 // router.post("/")
 

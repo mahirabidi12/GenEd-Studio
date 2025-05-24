@@ -28,8 +28,10 @@ const Form = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData),
+        credentials: 'include' 
     })
     const firstPrompt = await response.json();
+    console.log(firstPrompt)
   };
 
   const formatDuration = (seconds) => {
