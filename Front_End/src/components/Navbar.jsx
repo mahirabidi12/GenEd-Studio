@@ -5,7 +5,7 @@ import { useUser } from '../context/UserContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated, logout } = useUser();
   const navigate = useNavigate();
 
   const scrollToFeatures = (e) => {
@@ -16,6 +16,11 @@ const Navbar = () => {
     }
     setIsOpen(false); // Close mobile menu if open
   };
+
+  const handlelogout = async () => {
+    logout();
+    navigate('/');
+  }
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -72,13 +77,23 @@ const Navbar = () => {
                 </GradientButton>
               </>
             ) : (
-              <GradientButton
-                onClick={() => navigate('/create')}
-                size="sm"
-                className="ml-4"
-              >
-                Create
-              </GradientButton>
+              <>
+                <GradientButton
+                  onClick={() => navigate('/create')}
+                  size="sm"
+                  className="ml-4"
+                >
+                  Create
+                </GradientButton>
+                <GradientButton
+                  onClick={handlelogout}
+                  size="sm"
+                  className="ml-4"
+                >
+                  Logout
+                </GradientButton>
+
+              </>
             )}
           </div>
 
