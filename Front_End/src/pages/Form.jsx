@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GradientButton from '../components/GradientButton';
 import GradientText from '../components/GradientText';
 
 const Form = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -19,7 +21,7 @@ const Form = () => {
     }));
   };
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission here
     const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/trans/genTranscript` , {
