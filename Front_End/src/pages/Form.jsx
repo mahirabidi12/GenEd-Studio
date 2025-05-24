@@ -37,7 +37,7 @@ const Form = () => {
     // Navigate to EditPrompt with the generated prompt
     navigate('/edit-prompt', {
       state: {
-        response: firstPrompt.transcript
+        response: firstPrompt
       }
     });
   };

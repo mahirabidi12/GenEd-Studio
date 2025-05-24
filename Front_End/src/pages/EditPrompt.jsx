@@ -27,7 +27,7 @@ const EditPrompt = () => {
     setPromptText(e.target.value);
   };
 
-  const handlePersonaSelect = (persona) => {
+  const handlePersonaSelect = (persona) => { 
     setSelectedPersona(persona.id);
   };
 
