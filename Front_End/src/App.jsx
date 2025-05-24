@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import Form from './pages/Form';
 const App = () => {
   return (
     <UserProvider>
@@ -14,7 +15,7 @@ const App = () => {
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/create" element={<div className="p-8">Create Page (Coming Soon)</div>} />
+              <Route path="/create" element={<Form />} />
               <Route path="/templates" element={<div className="p-8">Templates Page (Coming Soon)</div>} />
               <Route path="/dashboard" element={<div className="p-8">Dashboard Page (Coming Soon)</div>} />
               <Route path="/login" element={<Login />} />

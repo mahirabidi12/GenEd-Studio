@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import GradientButton from '../components/GradientButton';
 import Card from '../components/Card';
 import backgroundVideo from '../assets/background.mp4';
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const features = [
     {
       title: 'Personalized Teaching',
@@ -64,22 +66,13 @@ const Home = () => {
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <GradientButton
-                  as={Link}
-                  to="/create"
+                  onClick={() => navigate('/create')}
                   size="lg"
                   className="text-lg"
                 >
                   Start Creating
                 </GradientButton>
-                <GradientButton
-                  as={Link}
-                  to="/templates"
-                  variant="outline"
-                  size="lg"
-                  className="text-lg"
-                >
-                  Browse Templates
-                </GradientButton>
+                
               </div>
             </div>
           </div>
@@ -113,8 +106,7 @@ const Home = () => {
             Join thousands of learners experiencing a new dimension of education with genEd Studio's AI-powered platform.
           </p>
           <GradientButton
-            as={Link}
-            to="/signup"
+            onClick={() => navigate('/create')}
             size="lg"
             className="text-lg"
           >
