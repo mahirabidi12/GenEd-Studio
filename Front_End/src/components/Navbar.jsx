@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import GradientButton from './GradientButton';
+import { useUser } from '../context/UserContext';
 
-const Navbar = ({ isLoggedIn = false }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, logout } = useUser();
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Create', path: '/create' },
-    { name: 'Templates', path: '/templates' },
-    { name: 'Dashboard', path: '/dashboard' },
+    { name: 'About', path: '/about' },
   ];
 
   return (
@@ -35,22 +34,41 @@ const Navbar = ({ isLoggedIn = false }) => {
                 {link.name}
               </Link>
             ))}
-            {!isLoggedIn ? (
-              <GradientButton
-                as={Link}
-                to="/login"
-                size="sm"
-                className="ml-4"
-              >
-                Sign In
-              </GradientButton>
+            
+            {isAuthenticated() ? (
+              <>
+                <GradientButton
+                  as={Link}
+                  to="/create"
+                  size="sm"
+                  className="ml-4"
+                >
+                  Create
+                </GradientButton>
+                <button
+                  onClick={logout}
+                  className="ml-4 text-gray-300 hover:text-white transition-colors duration-200"
+                >
+                  Logout
+                </button>
+              </>
             ) : (
-              <button
-                className="ml-4 text-gray-300 hover:text-white transition-colors duration-200"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                Account
-              </button>
+              <>
+                <Link
+                  to="/login"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                >
+                  Login
+                </Link>
+                <GradientButton
+                  as={Link}
+                  to="/signup"
+                  size="sm"
+                  className="ml-4"
+                >
+                  Sign Up
+                </GradientButton>
+              </>
             )}
           </div>
 
@@ -61,7 +79,6 @@ const Navbar = ({ isLoggedIn = false }) => {
               className="text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             >
               <span className="sr-only">Open main menu</span>
-              {/* Menu icon */}
               <svg
                 className="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,14 +120,42 @@ const Navbar = ({ isLoggedIn = false }) => {
                   {link.name}
                 </Link>
               ))}
-              {!isLoggedIn && (
-                <Link
-                  to="/login"
-                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Sign In
-                </Link>
+              {isAuthenticated() ? (
+                <>
+                  <Link
+                    to="/create"
+                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Create
+                  </Link>
+                  <button
+                    onClick={() => {
+                      logout();
+                      setIsOpen(false);
+                    }}
+                    className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </>
               )}
             </div>
           </div>
@@ -118,10 +163,6 @@ const Navbar = ({ isLoggedIn = false }) => {
       </div>
     </nav>
   );
-};
-
-Navbar.propTypes = {
-  isLoggedIn: PropTypes.bool
 };
 
 export default Navbar;
