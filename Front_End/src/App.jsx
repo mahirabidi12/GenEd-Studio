@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import VideoDisplay from './pages/VideoDisplay';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/video" element={<VideoDisplay />} />
             <Route path="/create" element={<div className="p-8">Create Page (Coming Soon)</div>} />
             <Route path="/templates" element={<div className="p-8">Templates Page (Coming Soon)</div>} />
             <Route path="/dashboard" element={<div className="p-8">Dashboard Page (Coming Soon)</div>} />
