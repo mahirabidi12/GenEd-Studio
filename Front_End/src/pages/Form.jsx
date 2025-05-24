@@ -33,7 +33,13 @@ const Form = () => {
         credentials: 'include' 
     })
     const firstPrompt = await response.json();
-    // console.log(firstPrompt)
+    
+    // Navigate to EditPrompt with the generated prompt
+    navigate('/edit-prompt', {
+      state: {
+        response: firstPrompt.transcript
+      }
+    });
   };
 
   const formatDuration = (seconds) => {
