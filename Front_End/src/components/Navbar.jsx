@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import GradientButton from './GradientButton';
-import { useUser } from '../context/UserContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, logout } = useUser();
+  const { isAuthenticated } = useAuth();
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
+    { name: 'About', path: '/#features' },
   ];
 
   return (
@@ -34,32 +34,8 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            
-            {isAuthenticated() ? (
+            {!isAuthenticated ? (
               <>
-                <GradientButton
-                  as={Link}
-                  to="/create"
-                  size="sm"
-                  className="ml-4"
-                >
-                  Create
-                </GradientButton>
-                <button
-                  onClick={logout}
-                  className="ml-4 text-gray-300 hover:text-white transition-colors duration-200"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
-                >
-                  Login
-                </Link>
                 <GradientButton
                   as={Link}
                   to="/signup"
@@ -68,7 +44,24 @@ const Navbar = () => {
                 >
                   Sign Up
                 </GradientButton>
+                <GradientButton
+                  as={Link}
+                  to="/login"
+                  size="sm"
+                  className="ml-2"
+                >
+                  Login
+                </GradientButton>
               </>
+            ) : (
+              <GradientButton
+                as={Link}
+                to="/create"
+                size="sm"
+                className="ml-4"
+              >
+                Create
+              </GradientButton>
             )}
           </div>
 
@@ -79,6 +72,7 @@ const Navbar = () => {
               className="text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             >
               <span className="sr-only">Open main menu</span>
+              {/* Menu icon */}
               <svg
                 className="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -120,34 +114,8 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              {isAuthenticated() ? (
+              {!isAuthenticated ? (
                 <>
-                  <Link
-                    to="/create"
-                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Create
-                  </Link>
-                  <button
-                    onClick={() => {
-                      logout();
-                      setIsOpen(false);
-                    }}
-                    className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/login"
-                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Login
-                  </Link>
                   <Link
                     to="/signup"
                     className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
@@ -155,7 +123,22 @@ const Navbar = () => {
                   >
                     Sign Up
                   </Link>
+                  <Link
+                    to="/login"
+                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Login
+                  </Link>
                 </>
+              ) : (
+                <Link
+                  to="/create"
+                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Create
+                </Link>
               )}
             </div>
           </div>
