@@ -31,7 +31,7 @@ const Form = () => {
         credentials: 'include' 
     })
     const firstPrompt = await response.json();
-    console.log(firstPrompt)
+    // console.log(firstPrompt)
   };
 
   const formatDuration = (seconds) => {

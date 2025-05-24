@@ -14,4 +14,14 @@ export async function generateTranscript(req,res) {
     }
 }
 
+export async function genFinalPrompt(req,res) {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
  
+
+
+
