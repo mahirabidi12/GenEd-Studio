@@ -20,6 +20,9 @@ const defaultPersonas = [
 const EditPrompt = () => {
   const location = useLocation();
   const [promptText, setPromptText] = useState(location.state?.response || '');
+  const formData = location.state?.formData;
+  console.log('Form Data received:', formData);
+  const [promptText, setPromptText] = useState('');
   const [selectedPersona, setSelectedPersona] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -68,11 +71,19 @@ const EditPrompt = () => {
           <h2 className="text-xl font-semibold mb-6 text-center">Select a Persona</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto mb-2">
             {defaultPersonas.map(persona => (
-              <div
+              <button
                 key={persona.id}
                 className={`group relative flex flex-col items-center p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer text-center bg-black/30 border-gray-800 hover:scale-[1.02] hover:border-emerald-500/50 ${selectedPersona === persona.id ? 'border-emerald-500 bg-gradient-to-br from-emerald-600/20 to-blue-600/20 shadow-lg' : ''}`}
                 onClick={() => handlePersonaSelect(persona)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handlePersonaSelect(persona);
+                  }
+                }}
                 style={{backdropFilter: 'blur(6px)'}}
+                tabIndex={0}
+                aria-pressed={selectedPersona === persona.id}
               >
                 {/* Animated gradient overlay on hover/selected */}
                 <div className={`absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-blue-600/20 transition-opacity duration-500 ${selectedPersona === persona.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
@@ -87,7 +98,7 @@ const EditPrompt = () => {
                   <h3 className="font-bold text-lg mb-2" style={{fontFamily: 'var(--font-primary)'}}>{persona.name}</h3>
                   <p className="text-gray-300 text-base transition-colors duration-300 group-hover:text-gray-200">{persona.description}</p>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
