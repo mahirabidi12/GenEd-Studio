@@ -2,6 +2,7 @@ import app from './app.js'
 import dotenv from 'dotenv'
 import express from 'express'
 import authRoutes from './routes/authRoutes.js'
+import transRoutes from './routes/transRoutes.js'
 import connectDb from './config/connectDb.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
@@ -20,3 +21,4 @@ app.listen(process.env.PORT , () => {
 connectDb()
 
 app.use("/auth" , authRoutes)
+app.use("/trans" , transRoutes)
