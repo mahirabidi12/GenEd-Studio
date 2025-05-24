@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GradientButton from '../components/GradientButton';
 import GradientText from '../components/GradientText';
 
 const Form = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -19,19 +21,23 @@ const Form = () => {
     }));
   };
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/trans/genTranscript` , {
-     method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData),
-        credentials: 'include' 
-    })
-    const firstPrompt = await response.json();
-    console.log(firstPrompt)
+    try {
+      // Using test data instead of API call
+      const testPrompt = "This is a test prompt based on your input:\n\n" + 
+        `Title: ${formData.title}\n` +
+        `Description: ${formData.description}\n` +
+        `Duration: ${formatDuration(formData.duration)}\n` +
+        `Target Audience: ${formData.targetAudience}\n` +
+        `Age Group: ${formData.ageGroup}`;
+
+      console.log(testPrompt);
+      // Navigate to EditPrompt with the test data
+      navigate('/edit-prompt', { state: { response: testPrompt } });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const formatDuration = (seconds) => {

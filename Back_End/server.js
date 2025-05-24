@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Your frontend URL
+    origin: 'http://localhost:5174', // Your frontend URL
     credentials: true,  // Allow credentials
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
