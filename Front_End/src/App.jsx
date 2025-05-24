@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Form from './pages/Form';
 import VideoDisplay from './pages/VideoDisplay';
+import EditPrompt from './pages/EditPrompt';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
               <Route path="/dashboard" element={<div className="p-8">Dashboard Page (Coming Soon)</div>} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/edit-prompt" element={<EditPrompt />} />
               <Route path="*" element={<div className="p-8">404 - Page Not Found</div>} />
             </Routes>
           </main>
