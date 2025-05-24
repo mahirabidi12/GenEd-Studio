@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import GradientButton from '../components/GradientButton';
@@ -16,6 +16,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
+
       const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/auth/login`, {
         method: 'POST',
         headers: {

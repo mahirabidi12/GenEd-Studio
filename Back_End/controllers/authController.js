@@ -96,6 +96,7 @@ export async function login(req, res) {
         id: user._id,
         name: user.name,
         email: user.email,
+        videoUrls: user.videoUrls,
       },
     });
   } catch (error) {

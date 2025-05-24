@@ -3,9 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import GradientButton from '../components/GradientButton';
 import Card from '../components/Card';
 import backgroundVideo from '../assets/background.mp4';
+import { useUser } from '../context/UserContext';
 
 const Home = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
+  const handleCreateVideo = () => {
+    if (isAuthenticated()) {
+      navigate('/create');
+    } else {
+      navigate('/login');
+    }
+  }
+
 
   const features = [
     {
@@ -66,13 +76,13 @@ const Home = () => {
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <GradientButton
-                  onClick={() => navigate('/create')}
+                  onClick={handleCreateVideo}
                   size="lg"
                   className="text-lg"
                 >
                   Start Creating
                 </GradientButton>
-                
+
               </div>
             </div>
           </div>
