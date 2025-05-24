@@ -58,7 +58,7 @@ const EditPrompt = () => {
     } finally {
       setIsGenerating(false);
     }
-  };
+  }; 
 
   return (
     <div className="min-h-screen bg-black text-white py-10 px-4 flex items-center justify-center">
