@@ -3,9 +3,11 @@ import dotenv from 'dotenv'
 import express from 'express'
 import authRoutes from './routes/authRoutes.js'
 import connectDb from './config/connectDb.js'
+import cors from 'cors'
 
 dotenv.config();
 
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended : true}))
 

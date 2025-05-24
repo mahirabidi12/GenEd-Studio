@@ -12,10 +12,30 @@ const SignUp = () => {
     audio: null
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+
+
+    const form = new FormData();
+    form.append('name', formData.name);
+    form.append('email', formData.email);
+    form.append('password', formData.password);
+    if (formData.video) form.append('video', formData.video);
+    if (formData.audio) form.append('audio', formData.audio); 
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/auth/signup`, {
+        method: 'POST',
+        body: form, 
+      });
+
+      const result = await response.json();
+      console.log(result);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+
   };
 
   const handleFileChange = (e) => {
