@@ -9,7 +9,8 @@ const SignUp = () => {
     email: '',
     password: '',
     video: null,
-    audio: null
+    audio: null,
+    videoName : ''
   });
 
   const handleSubmit = async (e) => {
@@ -120,7 +121,7 @@ const SignUp = () => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <label htmlFor="audio" className="block text-sm font-medium text-gray-300">
                 Upload Audio
               </label>
@@ -131,6 +132,19 @@ const SignUp = () => {
                 accept="audio/*"
                 className="mt-1 block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gray-800 file:text-gray-300 hover:file:bg-gray-700"
                 onChange={handleFileChange}
+              />
+            </div> */}
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+                Video Name
+              </label>
+              <input
+                id="videoName"
+                name="videoName"
+                type="text"
+                required
+                className="mt-1 block w-full rounded-lg bg-gray-900 border border-gray-700 text-white px-4 py-2 focus:ring-emerald-500 focus:border-emerald-500"
+                onChange={handleChange}
               />
             </div>
           </div>
