@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 import dotenv from 'dotenv'
 import User from "../models/userModel.js";
 
@@ -14,8 +14,7 @@ export const protect = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     // Attach the user to the request object
     req.user = await User.findById(decoded.id).select("-password");
 

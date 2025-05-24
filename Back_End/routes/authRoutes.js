@@ -20,6 +20,9 @@ router.post(
 
 router.post("/login" , login)
 
+router.get("/userDetails", protect , (req,res) => {
+    res.status(200).send(req.user);
+})
 
 
 
