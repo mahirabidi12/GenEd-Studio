@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Link, useNavigate } from 'react-router-dom';
 import GradientButton from './GradientButton';
+import { useUser } from '../context/UserContext';
 
-const Navbar = ({ isLoggedIn = false }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated } = useUser();
+  const navigate = useNavigate();
+
+  const scrollToFeatures = (e) => {
+    e.preventDefault();
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false); // Close mobile menu if open
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Create', path: '/create' },
-    { name: 'Templates', path: '/templates' },
-    { name: 'Dashboard', path: '/dashboard' },
+    { name: 'About', path: '/#features', onClick: scrollToFeatures },
   ];
 
   return (
@@ -27,30 +36,49 @@ const Navbar = ({ isLoggedIn = false }) => {
           {/* Desktop Menu */}
           <div className="hidden md:flex md:items-center md:space-x-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
-              >
-                {link.name}
-              </Link>
+              link.onClick ? (
+                <button
+                  key={link.path}
+                  onClick={link.onClick}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                >
+                  {link.name}
+                </button>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
-            {!isLoggedIn ? (
+            {!isAuthenticated() ? (
+              <>
+                <GradientButton
+                  onClick={() => navigate('/signup')}
+                  size="sm"
+                  className="ml-4"
+                >
+                  Sign Up
+                </GradientButton>
+                <GradientButton
+                  onClick={() => navigate('/login')}
+                  size="sm"
+                  className="ml-2"
+                >
+                  Login
+                </GradientButton>
+              </>
+            ) : (
               <GradientButton
-                as={Link}
-                to="/login"
+                onClick={() => navigate('/create')}
                 size="sm"
                 className="ml-4"
               >
-                Sign In
+                Create
               </GradientButton>
-            ) : (
-              <button
-                className="ml-4 text-gray-300 hover:text-white transition-colors duration-200"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                Account
-              </button>
             )}
           </div>
 
@@ -94,23 +122,56 @@ const Navbar = ({ isLoggedIn = false }) => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </Link>
+                link.onClick ? (
+                  <button
+                    key={link.path}
+                    onClick={link.onClick}
+                    className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
-              {!isLoggedIn && (
-                <Link
-                  to="/login"
-                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
+              {!isAuthenticated() ? (
+                <>
+                  <button
+                    onClick={() => {
+                      navigate('/signup');
+                      setIsOpen(false);
+                    }}
+                    className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Sign Up
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate('/login');
+                      setIsOpen(false);
+                    }}
+                    className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Login
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    navigate('/create');
+                    setIsOpen(false);
+                  }}
+                  className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Sign In
-                </Link>
+                  Create
+                </button>
               )}
             </div>
           </div>
@@ -118,10 +179,6 @@ const Navbar = ({ isLoggedIn = false }) => {
       </div>
     </nav>
   );
-};
-
-Navbar.propTypes = {
-  isLoggedIn: PropTypes.bool
 };
 
 export default Navbar;

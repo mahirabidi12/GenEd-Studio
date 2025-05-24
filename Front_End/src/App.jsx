@@ -1,9 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+
 import VideoDisplay from './pages/VideoDisplay';
 
 const App = () => {
