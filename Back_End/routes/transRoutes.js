@@ -8,4 +8,4 @@ router.post("/genTranscript",generateTranscript)
 
 // router.post("/")
 
-export default router   
+export default router 

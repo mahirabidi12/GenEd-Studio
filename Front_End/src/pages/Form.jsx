@@ -6,12 +6,12 @@ const Form = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    duration: 10, // Default 10 seconds
+    duration: 10, 
     targetAudience: '',
     ageGroup: ''
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e) => { 
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -19,10 +19,17 @@ const Form = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
     // Handle form submission here
-    console.log(formData);
+    const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/trans/genTranscript` , {
+     method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
+    })
+    const firstPrompt = await response.json();
   };
 
   const formatDuration = (seconds) => {

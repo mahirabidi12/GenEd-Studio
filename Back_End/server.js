@@ -26,4 +26,4 @@ app.listen(process.env.PORT , () => {
 connectDb()
 
 app.use("/auth" , authRoutes)
-app.use("/trans" , transRoutes)
+app.use("/trans" , transRoutes) 

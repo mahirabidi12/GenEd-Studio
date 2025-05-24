@@ -14,3 +14,4 @@ export async function generateTranscript(req,res) {
     }
 }
 
+ 

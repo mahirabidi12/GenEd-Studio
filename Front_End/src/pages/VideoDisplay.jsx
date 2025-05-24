@@ -17,7 +17,7 @@ const VideoDisplay = () => {
       setIsPlaying(true);
     } else {
       videoRef.current.pause();
-      setIsPlaying(false);
+      setIsPlaying(false); 
     }
   };
 
