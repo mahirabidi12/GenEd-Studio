@@ -4,10 +4,12 @@ import express from 'express'
 import authRoutes from './routes/authRoutes.js'
 import connectDb from './config/connectDb.js'
 import cors from 'cors'
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
 app.use(cors())
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended : true}))
 
