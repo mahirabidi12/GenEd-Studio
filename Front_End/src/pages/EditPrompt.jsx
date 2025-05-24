@@ -19,10 +19,18 @@ const defaultPersonas = [
 
 const EditPrompt = () => {
   const location = useLocation();
+  console.log('Location state:', location.state); // Log entire state
   const [promptText, setPromptText] = useState(location.state?.response || '');
-  const formData = location.state?.formData;
-  console.log('Form Data received:', formData);
-  // const [promptText, setPromptText] = useState('');
+  const formData = location.state?.fData; 
+  
+  // More detailed logging
+  if (!location.state) {
+    console.warn('No state received in location');
+  } else if (!formData) {
+    console.warn('No formData found in location state');
+  } else {
+    console.log('Form Data received:', formData);
+  }
   const [selectedPersona, setSelectedPersona] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
 

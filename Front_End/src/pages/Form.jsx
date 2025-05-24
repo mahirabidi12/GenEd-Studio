@@ -34,10 +34,11 @@ const Form = () => {
     })
     const firstPrompt = await response.json();
     
-    // Navigate to EditPrompt with the generated prompt
+    // Navigate to EditPrompt with both response and form data
     navigate('/edit-prompt', {
       state: {
-        response: firstPrompt
+        response: firstPrompt,
+        fData: formData
       }
     });
   };
