@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 
 const App = () => {
   return (
+
     <BrowserRouter>
       <div className="min-h-screen bg-gray-900 text-white">
         <Navbar />
@@ -22,6 +24,7 @@ const App = () => {
         </main>
       </div>
     </BrowserRouter>
+
   );
 };
 
