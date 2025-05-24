@@ -22,7 +22,7 @@ const EditPrompt = () => {
   const [promptText, setPromptText] = useState(location.state?.response || '');
   const formData = location.state?.formData;
   console.log('Form Data received:', formData);
-  const [promptText, setPromptText] = useState('');
+  // const [promptText, setPromptText] = useState('');
   const [selectedPersona, setSelectedPersona] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
