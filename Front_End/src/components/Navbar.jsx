@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GradientButton from './GradientButton';
-import { useAuth } from '../contexts/AuthContext';
+import { useUser } from '../context/UserContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useUser();
+  const navigate = useNavigate();
+
+  const scrollToFeatures = (e) => {
+    e.preventDefault();
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false); // Close mobile menu if open
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/#features' },
+    { name: 'About', path: '/#features', onClick: scrollToFeatures },
   ];
 
   return (
@@ -26,27 +36,35 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex md:items-center md:space-x-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
-              >
-                {link.name}
-              </Link>
+              link.onClick ? (
+                <button
+                  key={link.path}
+                  onClick={link.onClick}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                >
+                  {link.name}
+                </button>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
-            {!isAuthenticated ? (
+            {!isAuthenticated() ? (
               <>
                 <GradientButton
-                  as={Link}
-                  to="/signup"
+                  onClick={() => navigate('/signup')}
                   size="sm"
                   className="ml-4"
                 >
                   Sign Up
                 </GradientButton>
                 <GradientButton
-                  as={Link}
-                  to="/login"
+                  onClick={() => navigate('/login')}
                   size="sm"
                   className="ml-2"
                 >
@@ -55,8 +73,7 @@ const Navbar = () => {
               </>
             ) : (
               <GradientButton
-                as={Link}
-                to="/create"
+                onClick={() => navigate('/create')}
                 size="sm"
                 className="ml-4"
               >
@@ -105,40 +122,56 @@ const Navbar = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              {!isAuthenticated ? (
-                <>
+                link.onClick ? (
+                  <button
+                    key={link.path}
+                    onClick={link.onClick}
+                    className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
                   <Link
-                    to="/signup"
+                    key={link.path}
+                    to={link.path}
                     className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              ))}
+              {!isAuthenticated() ? (
+                <>
+                  <button
+                    onClick={() => {
+                      navigate('/signup');
+                      setIsOpen(false);
+                    }}
+                    className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
                   >
                     Sign Up
-                  </Link>
-                  <Link
-                    to="/login"
-                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    onClick={() => setIsOpen(false)}
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate('/login');
+                      setIsOpen(false);
+                    }}
+                    className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
                   >
                     Login
-                  </Link>
+                  </button>
                 </>
               ) : (
-                <Link
-                  to="/create"
-                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
+                <button
+                  onClick={() => {
+                    navigate('/create');
+                    setIsOpen(false);
+                  }}
+                  className="text-gray-300 hover:text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium"
                 >
                   Create
-                </Link>
+                </button>
               )}
             </div>
           </div>

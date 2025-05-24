@@ -87,7 +87,7 @@ const Home = () => {
       </div>
 
       {/* Features Section with Black Background */}
-      <div className="bg-black">
+      <div id="features" className="bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <h2 className="text-3xl sm:text-4xl text-center font-bold mb-16 text-white">
             Everything You Need
