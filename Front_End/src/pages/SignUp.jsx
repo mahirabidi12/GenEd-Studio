@@ -1,42 +1,50 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GradientButton from '../components/GradientButton';
 import GradientText from '../components/GradientText';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     video: null,
     audio: null,
-    videoName : ''
+    videoName: ''
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     const form = new FormData();
     form.append('name', formData.name);
     form.append('email', formData.email);
     form.append('password', formData.password);
+    form.append('videoName', formData.videoName);
     if (formData.video) form.append('video', formData.video);
-    if (formData.audio) form.append('audio', formData.audio); 
+    if (formData.audio) form.append('audio', formData.audio);
 
     try {
       const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/auth/signup`, {
         method: 'POST',
-        body: form, 
+        body: form,
       });
 
       const result = await response.json();
       console.log(result);
-      
+
+      if (response.ok) { // Check if response status is 2xx
+        navigate('/login'); // Redirect to login page on success
+      } else {
+        // Handle error case
+        alert(result.message || 'Signup failed');
+      }
+
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert('An error occurred during signup');
     }
-
   };
 
   const handleFileChange = (e) => {
@@ -109,12 +117,13 @@ const SignUp = () => {
 
             <div>
               <label htmlFor="video" className="block text-sm font-medium text-gray-300">
-                Upload Video
+                Upload Persona Video
               </label>
               <input
                 id="video"
                 name="video"
                 type="file"
+                required
                 accept="video/*"
                 className="mt-1 block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gray-800 file:text-gray-300 hover:file:bg-gray-700"
                 onChange={handleFileChange}
@@ -136,7 +145,7 @@ const SignUp = () => {
             </div> */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300">
-                Video Name
+                Persona Name
               </label>
               <input
                 id="videoName"

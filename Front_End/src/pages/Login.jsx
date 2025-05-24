@@ -1,18 +1,43 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 import GradientButton from '../components/GradientButton';
 import GradientText from '../components/GradientText';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { login } = useUser();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include' // Important for cookies
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        console.log('Logged in user:', result.user);
+        login(result.user);
+        navigate('/'); 
+      } else {
+        alert(result.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred during login');
+    }
   };
 
   const handleChange = (e) => {
