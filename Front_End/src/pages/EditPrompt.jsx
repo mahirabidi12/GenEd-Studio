@@ -11,7 +11,7 @@ const defaultPersonas = [
   },
   {
     id: 2,
-    name: "NV Sir",
+    name: "NV Sir", 
     description: "Friendly and casual teaching approach",
     imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJT4EmqnIorEqoDkecoiT5APPheamDS9wFXQ&s"
   }
@@ -56,7 +56,7 @@ const EditPrompt = () => {
         },
         body: JSON.stringify({
           transcript: promptText,
-          personaId: selectedPersona 
+          personaId: selectedPersona,
         }),
         credentials: 'include' 
       });

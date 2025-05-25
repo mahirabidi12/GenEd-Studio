@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import express from 'express'
 import authRoutes from './routes/authRoutes.js'
 import transRoutes from './routes/transRoutes.js'
+import syncRoutes from './routes/syncRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 import connectDb from './config/connectDb.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
@@ -27,3 +29,5 @@ connectDb()
 
 app.use("/auth" , authRoutes)
 app.use("/trans" , transRoutes) 
+// app.use("/sync",syncRoutes)
+app.use("/user" , userRoutes)
