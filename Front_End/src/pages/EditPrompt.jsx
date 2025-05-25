@@ -49,6 +49,8 @@ const EditPrompt = () => {
     }
     setIsGenerating(true);
     try {
+      // console.log(promptText)
+      // console.log(selectedPersona)
       const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/trans/genFinalPrompt`, {
         method: 'POST',
         headers: {
