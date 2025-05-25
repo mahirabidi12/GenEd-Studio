@@ -5,8 +5,8 @@ import { generateTranscript, genFinalPrompt } from '../controllers/transControle
 const router = express.Router();
 
 router.post("/genTranscript",protect,generateTranscript)
-router.post("/genFinalPrompt" , protect , genFinalPrompt)
+router.post("/genFinalPrompt" ,protect, genFinalPrompt)
 
 // router.post("/")
 
-export default router 
+export default router  

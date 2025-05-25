@@ -38,7 +38,7 @@ const Form = () => {
     navigate('/edit-prompt', {
       state: {
         response: firstPrompt,
-        fData: formData
+        fData: formData 
       }
     });
   };

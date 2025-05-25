@@ -19,7 +19,7 @@ const defaultPersonas = [
 
 const EditPrompt = () => {
   const location = useLocation();
-  console.log('Location state:', location.state); // Log entire state
+  // console.log('Location state:', location.state); // Log entire state
   const [promptText, setPromptText] = useState(location.state?.response || '');
   const formData = location.state?.fData; 
   
@@ -29,7 +29,7 @@ const EditPrompt = () => {
   } else if (!formData) {
     console.warn('No formData found in location state');
   } else {
-    console.log('Form Data received:', formData);
+    // console.log('Form Data received:', formData);
   }
   const [selectedPersona, setSelectedPersona] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -49,22 +49,23 @@ const EditPrompt = () => {
     }
     setIsGenerating(true);
     try {
-      const response = await fetch('http://localhost:3000/user/generateResponse', {
+      const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/trans/genFinalPrompt`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: promptText,
-          personaId: selectedPersona
+          transcript: promptText,
+          personaId: selectedPersona 
         }),
+        credentials: 'include' 
       });
       if (!response.ok) {
         throw new Error('Generation failed');
       }
       const data = await response.json();
       console.log(data);
-    } catch (error) {
+    } catch (error) { 
       console.error('Error:', error);
     } finally {
       setIsGenerating(false);

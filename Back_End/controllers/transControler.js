@@ -1,5 +1,6 @@
 import chatGemini from "../utils/askGemini.js";
-import { firstPrompt } from "../utils/generatePrompt.js";
+import { finalPrompt, firstPrompt ,  } from "../utils/generatePrompt.js";
+
 
 
 export async function generateTranscript(req,res) {
@@ -16,8 +17,14 @@ export async function generateTranscript(req,res) {
 
 export async function genFinalPrompt(req,res) {
     try {
-        
+        const {transcript,personaId} = req.body;
+        const promptFinal = finalPrompt(transcript)
+        const response = await chatGemini(promptFinal)
+        console.log(response)
+        // console.log(req.body)
+        res.status(201).json(response)
     } catch (error) {
+        res.status(400).json({error : error.message})
         
     }
 }
