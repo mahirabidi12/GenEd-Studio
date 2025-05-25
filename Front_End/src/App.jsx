@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
+import ProtectedRoute from './context/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
@@ -20,12 +21,20 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/video" element={<VideoDisplay />} />
-              <Route path="/create" element={<Form />} />
+              <Route path="/create" element={
+                <ProtectedRoute>
+                  <Form />
+                </ProtectedRoute>
+              } />
               <Route path="/templates" element={<div className="p-8">Templates Page (Coming Soon)</div>} />
               <Route path="/dashboard" element={<div className="p-8">Dashboard Page (Coming Soon)</div>} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/edit-prompt" element={<EditPrompt />} />
+              <Route path="/edit-prompt" element={
+                <ProtectedRoute>
+                  <EditPrompt />
+                </ProtectedRoute>
+              } />
               <Route path="*" element={<div className="p-8">404 - Page Not Found</div>} />
             </Routes>
           </main>
