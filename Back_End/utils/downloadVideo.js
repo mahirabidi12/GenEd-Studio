@@ -2,8 +2,7 @@ import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 
-async function downloadVideoFromURL(videoUrl) {
-  const folderPath = path.resolve('final_videos');
+async function downloadVideoFromURL(videoUrl, folderPath) {
   const filePath = path.join(folderPath, 'final_video2.mp4');
 
   try {

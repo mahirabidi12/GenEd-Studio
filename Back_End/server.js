@@ -8,6 +8,7 @@ import userRoutes from './routes/userRoutes.js'
 import connectDb from './config/connectDb.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.use(morgan('combined'));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended : true})) 
