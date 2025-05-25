@@ -46,7 +46,10 @@ const Form = () => {
   const formatDuration = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    if (minutes > 0) {
+      return `${minutes}m ${remainingSeconds.toString().padStart(2, '0')}s`;
+    }
+    return `${seconds}s`;
   };
 
   const inputStyles = "mt-1 block w-full rounded-lg bg-black border-2 border-gray-700 text-white shadow-sm text-base px-3 py-2 transition-all duration-300 focus:border-emerald-500 focus:ring-0 focus:outline-none";
@@ -104,7 +107,7 @@ const Form = () => {
                 name="duration"
                 id="duration"
                 min="10"
-                max="90"
+                max="1200"
                 step="10"
                 value={formData.duration}
                 onChange={handleChange}
@@ -112,7 +115,7 @@ const Form = () => {
               />
               <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>10s</span>
-                <span>1m 30s</span>
+                <span>20m 00s</span>
               </div>
             </div>
 
