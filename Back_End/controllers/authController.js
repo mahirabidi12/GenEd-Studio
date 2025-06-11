@@ -40,7 +40,7 @@ export async function signup(req, res) {
 
     //video
     if (files.video) {
-      if (Array.isArray(files.video)) {
+      if (Array.isArray(files.video)) { 
         for (const videoFile of files.video) {
           const publicName = videoName || `video${videoCount++}`;
           const url = await uploadAndCleanup(videoFile, publicName);

@@ -132,7 +132,7 @@ Return only the transcript. It will be converted into a video using AI. , don't 
 export function finalPrompt(transcript) {
   return `You are a powerful AI assistant embedded in an AI-powered educational content creation tool.
 
-Your role is to process the following transcript and convert it into a sequence of concise, logically independent lines that a digital persona can speak naturally, one at a time. Each line will be paired with a prompt to generate either an AI-generated **image** or **video**.
+Your role is to process the following transcript and convert it into a sequence of concise, logically independent lines that a digital persona can speak naturally, one at a time. Each line will be paired with a prompt to generate either an AI-generated **image** or **video**. Generating is a heavy task so chunk lightly .
 
 ### Output Format
 Return a **pure JSON array** of objects like this:
