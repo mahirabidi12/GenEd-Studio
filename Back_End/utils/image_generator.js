@@ -42,6 +42,9 @@ async function generateImages(prompts, outputDir) {
             await fs.writeFile(imagePath, resizedImageBuffer);
 
             results.push({ id, path: imagePath });
+            setTimeout(() => {
+                console.log(`Image for prompt ID ${id} saved at ${imagePath}`);
+            }, 3000);
         } catch (error) {
             console.error(`Error processing prompt ID ${id}:`, error);
         }

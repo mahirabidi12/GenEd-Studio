@@ -155,7 +155,7 @@ Return a **pure JSON array** of objects like this:
 
 ### Instructions
 - Break the transcript into **clear, self-contained lines** that are easy to speak individually.
-- Assign **exactly 50% of the lines** as \`"image"\` and the other 50% as \`"video"\`.
+- Assign **exactly 30% of the lines** as \`"image"\` and the other 70% as \`"video"\`.
 - Mark **visually dynamic concepts** like **muscles, physics, brain activity, chemical reactions, body movement**, etc., as \`"video"\`.
 - Mark **static concepts** such as **definitions, diagrams, simple objects, facts, and descriptions** as \`"image"\`.
 - Flag anything that could look **visually stunning or benefit from motion** as \`"video"\`.

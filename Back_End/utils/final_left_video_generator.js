@@ -20,9 +20,10 @@ async function processMediaChunks(chunks, outputDir) {
         fs.mkdirSync(tempDir, { recursive: true });
     }
 
-    const videoChunks = chunks.filter(chunk => chunk.type === 'video');
-    const imageChunks = chunks.filter(chunk => chunk.type === 'image');
-    const audioChunks = chunks.map(chunk => ({ id: chunk.id, line: chunk.line }));
+    const videoChunks = await chunks.filter(chunk => chunk.type === 'video');
+    const imageChunks = await chunks.filter(chunk => chunk.type === 'image');
+    const audioChunks = await chunks.map(chunk => ({ id: chunk.id, line: chunk.line }));
+    console.log('image chunks', imageChunks);
 
     // Function to get audio duration using ffprobe
     async function getAudioDuration(audioFile) {
