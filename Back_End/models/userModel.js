@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true , unique : true},
   name: { type: String, required: true },
   password: { type: String, required: true },
-  videoUrls: { type: [{name : {type : String , required : true } , url : {type : String, required : true}}], required: true },
+  // videoUrls: { type: [{name : {type : String , required : true } , url : {type : String, required : true}}], required: true },
 //   audioUrls: { type: [String] },
 });
 

@@ -9,9 +9,9 @@ const SignUp = () => {
     name: '',
     email: '',
     password: '',
-    video: null,
-    audio: null,
-    videoName: ''
+    // video: null,
+    // audio: null,
+    // videoName: ''
   });
 
   const handleSubmit = async (e) => {
@@ -21,9 +21,9 @@ const SignUp = () => {
     form.append('name', formData.name);
     form.append('email', formData.email);
     form.append('password', formData.password);
-    form.append('videoName', formData.videoName);
-    if (formData.video) form.append('video', formData.video);
-    if (formData.audio) form.append('audio', formData.audio);
+    // form.append('videoName', formData.videoName);
+    // if (formData.video) form.append('video', formData.video);
+    // if (formData.audio) form.append('audio', formData.audio);
 
     try {
       const response = await fetch(`${import.meta.env.VITE_BACK_END_ENDPOINT}/auth/signup`, {
@@ -115,7 +115,7 @@ const SignUp = () => {
               />
             </div>
 
-            <div>
+            {/*<div>
               <label htmlFor="video" className="block text-sm font-medium text-gray-300">
                 Upload Persona Video
               </label>
@@ -128,7 +128,7 @@ const SignUp = () => {
                 className="mt-1 block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gray-800 file:text-gray-300 hover:file:bg-gray-700"
                 onChange={handleFileChange}
               />
-            </div>
+            </div>*/}
 
             {/* <div>
               <label htmlFor="audio" className="block text-sm font-medium text-gray-300">
@@ -143,7 +143,8 @@ const SignUp = () => {
                 onChange={handleFileChange}
               />
             </div> */}
-            <div>
+
+            {/* <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300">
                 Persona Name
               </label>
@@ -155,8 +156,8 @@ const SignUp = () => {
                 className="mt-1 block w-full rounded-lg bg-gray-900 border border-gray-700 text-white px-4 py-2 focus:ring-emerald-500 focus:border-emerald-500"
                 onChange={handleChange}
               />
-            </div>
-          </div>
+            </div> */}
+          </div> 
 
           <div>
             <GradientButton
